@@ -1,4 +1,9 @@
-# Installation
+# Tmux
+
+![tmux](images/tmux.gif)
+---
+
+## Installation
 - run the command 
 ```
 $ ./install.sh
