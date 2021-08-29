@@ -95,6 +95,17 @@ nvim_lsp.gopls.setup{
 	on_attach = on_attach
 }
 
+nvim_lsp.bashls.setup{}
+
+--Enable (broadcasting) snippet capability for completion
+local cap = vim.lsp.protocol.make_client_capabilities()
+cap.textDocument.completion.completionItem.snippetSupport = true
+
+nvim_lsp.html.setup {
+  capabilities = cap,
+}
+nvim_lsp.dockerls.setup{}
+
 nvim_lsp.flow.setup {
   on_attach = on_attach
 }
