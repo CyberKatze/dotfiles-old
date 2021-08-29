@@ -1,9 +1,17 @@
 # m3d Dotfile
+Managing your dotfile with symlink.
 
 ## Installation 
-```bash
-$ stow <filename>
-```
+1. Clone the repository
+	```bash
+		git clone https://github.com/m3dsh/dotfiles.git ~/.dotfiles
+	```
+2. Go to ~/.dotfiles and run 
+	```bash
+	$ stow <directory name>
+	```
+	for each file you want to install
+3. Read each `README.md` in directory for more config
 
 ## Uninstalling 
 ```
