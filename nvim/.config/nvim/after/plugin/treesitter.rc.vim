@@ -25,7 +25,8 @@ require'nvim-treesitter.configs'.setup {
     "scss",
     "go",
     "bash",
-    "json"
+    "json",
+	"latex"
   },
 }
 

@@ -1,6 +1,8 @@
 set fish_greeting
 set PATH $PATH /usr/local/go/bin
 set PATH $PATH /home/m3d/go/bin
+set PATH $PATH /home/m3d/.cargo/bin
+set PATH $PATH /home/m3d/.yarn/bin
 abbr -a ws 'sudo systemctl start windscribe'
 abbr -a wind 'windscribe connect'
 set EDITOR (which nvim) 

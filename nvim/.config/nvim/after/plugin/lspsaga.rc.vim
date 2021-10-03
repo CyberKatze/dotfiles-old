@@ -13,12 +13,12 @@ saga.init_lsp_saga {
 -- infor_sign = '',
 -- dianostic_header_icon = '   ',
 -- code_action_icon = ' ',
--- code_action_prompt = {
---   enable = true,
---   sign = true,
---   sign_priority = 20,
---   virtual_text = true,
--- },
+ code_action_prompt = {
+   enable = true,
+   sign = true,
+   sign_priority = 20,
+   virtual_text = false,
+},
 -- finder_definition_icon = '  ',
 -- finder_reference_icon = '  ',
 -- max_preview_lines = 10, -- preview lines of lsp_finder and definition preview
@@ -42,7 +42,6 @@ saga.init_lsp_saga {
 
   error_sign = '',
   warn_sign = '',
-  hint_sign = '',
   infor_sign = '',
   border_style = "round",
 }

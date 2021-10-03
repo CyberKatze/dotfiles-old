@@ -1,5 +1,4 @@
 #Alacritty:
-
 env:
   TERM: xterm-256color 
 position:
@@ -127,7 +126,6 @@ bell:
   color: '0xffffff'
   duration: 1
     
-    #background_opacity: .95
 
 # cursor:
 #   style: Underline

@@ -84,22 +84,22 @@ element {
     background-color:               @background-light;
     text-color:                     @foreground;
     orientation:                    vertical;
-    border-radius:                  100%;
+    border-radius:                  0;
 }
 
 element-text {
 	font:							"Hurmit Nerd Font Mono 32";
+	background-color:				@background-light;
     expand:                         true;
     horizontal-align:               0.5;
-    vertical-align:                 0;
-    margin:                         5px 10px 50px 10px;
+    vertical-align:                 0.5;
+    margin:                         5px 10px 5px 10px;
 }
 
 element normal.urgent,
 element alternate.urgent {
     background-color:               @off;
     text-color:                     @background;
-    border-radius:                  100%;
 }
 
 element normal.active,
@@ -112,7 +112,6 @@ element selected {
     background-color:               @background-light;
     text-color:                     @accent;
     border:                  		0px 0px 2px 0px;
-    border-radius:                  100%;
     border-color:                  	@accent;
 }
 

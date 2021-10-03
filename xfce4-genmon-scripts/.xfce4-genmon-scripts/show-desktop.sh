@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #genmon script for showing desktop
-showDesktopIcon=$(echo " \uf6c3")
+showDesktopIcon=$(echo "\uf6c3")
 
 INFO="<txt>"
 INFO+="<span weight='Regular' fgcolor='White'>" 

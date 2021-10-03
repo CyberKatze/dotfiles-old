@@ -8,7 +8,7 @@
  */
 
 configuration {
-	font:							"FantasqueSansMono Nerd Font 12";
+	font:							"NotoSansMono Nerd Font 12";
     show-icons:                     false;
 	icon-theme: 					"Papirus";
     drun-display-format:            "{name}";
@@ -24,7 +24,7 @@ window {
     transparency:                   "real";
     background-color:               @background;
     text-color:                     @foreground;
-    border-radius:                  25px;
+    border-radius:                  0;
     height:                         28.5%;
     width:                          50%;
     location:                       center;
@@ -63,7 +63,7 @@ inputbar {
 listview {
     background-color:               @background;
     margin:                         0% 0% 0% 0%;
-    spacing:                        2%;
+    spacing:                        3%;
     cycle:                          true;
     dynamic:                        true;
     layout:                         horizontal;
@@ -78,17 +78,19 @@ mainbox {
 
 element {
     background-color:               @background-alt;
-    text-color:                     @foreground;
+    text-color:                     @background-alt;
     orientation:                    horizontal;
-    border-radius:                  100%;
+	border-radius:					100%;
 }
 
 element-text {
-	font:							"feather 32";
+	font:							"NotoSansMono Nerd Font 28";
+	text-color:						@foreground;
+	background-color:				@background-alt;
     expand:                         true;
     horizontal-align:               0.5;
     vertical-align:                 0.5;
-    margin:                         4.5% 2.7% 7.5% 2.7%;
+    margin:                         3.5% 2.0% 3.5% 2.0%;
 }
 
 element normal.urgent,
@@ -105,7 +107,7 @@ element alternate.active {
 }
 
 element selected {
-    background-color:               @selected;
+    background-color:               @background-alt;
     text-color:                     @foreground;
     border:                  		0% 0.2% 0.2% 0%;
     border-radius:                  100%;

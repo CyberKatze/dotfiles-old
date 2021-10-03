@@ -206,6 +206,7 @@ map gd cd ~/Documents
 
 map gD cd ~/Downloads
 map gb cd ~/books
+map gB cd ~/books/Current
 
 
 map gc cd ~/.config
