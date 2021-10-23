@@ -10,6 +10,7 @@ endif
 
 "---------------------------
 set autoread      " Reload files changed outside vim
+set hidden	"buffer hidden
 " Trigger autoread when changing buffers or coming back to vim in terminal.
 au FocusGained,BufEnter * :silent! !
 set numberwidth=5
@@ -60,3 +61,11 @@ set hls
 set ruler
 "filenams
 au BufRead * normal zR
+
+"Latex
+let g:tex_flavor  = 'latex'
+let g:tex_conceal = ''
+let g:vimtex_fold_manual = 1
+let g:vimtex_latexmk_continuous = 1
+let g:vimtex_compiler_progname = 'nvr'
+let g:vimtex_view_general_viewer = 'qpdfview'

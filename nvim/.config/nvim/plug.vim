@@ -23,6 +23,11 @@ if has("nvim")
   Plug 'akinsho/bufferline.nvim'
   Plug 'kyazdani42/nvim-tree.lua'
   Plug 'SirVer/ultisnips'
+   " --------- adding the following three plugins for Latex ---------
+    Plug 'lervag/vimtex'
+    Plug 'Konfekt/FastFold'
+    Plug 'matze/vim-tex-fold'
+
 endif
 
 call plug#end()
