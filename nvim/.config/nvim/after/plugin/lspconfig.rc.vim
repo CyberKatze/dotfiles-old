@@ -21,6 +21,9 @@ local on_attach = function(client, bufnr)
 
   -- Mappings.
   local opts = { noremap=true, silent=true }
+  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
@@ -91,6 +94,7 @@ local on_attach = function(client, bufnr)
   }
 end
 
+
 nvim_lsp.gopls.setup{
 cmd = {'gopls'},
 	-- for postfix snippets and analyzers
@@ -109,6 +113,7 @@ cmd = {'gopls'},
 }
 
 nvim_lsp.bashls.setup{}
+nvim_lsp.clangd.setup{}
 
 --Enable (broadcasting) snippet capability for completion
 local cap = vim.lsp.protocol.make_client_capabilities()

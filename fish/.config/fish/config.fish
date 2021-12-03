@@ -14,3 +14,4 @@ alias vim="nvim"
 alias lf lfrun
 alias color "colorscript random"
 alias ll "exa --icons -l -g"
+alias tlmgr "/usr/share/texmf-dist/scripts/texlive/tlmgr.pl --usermode"

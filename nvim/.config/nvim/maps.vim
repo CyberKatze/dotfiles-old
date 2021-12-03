@@ -58,11 +58,6 @@ vnoremap <silent> # :<C-U>
   \gvy?<C-R><C-R>=substitute(
   \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
   \gV:call setreg('"', old_reg, old_regtype)<CR>
-"===============================================================================
-" Nvimtree binding
-"===============================================================================
-nnoremap <leader>n :NvimTreeToggle<CR>
-nnoremap <leader>r :NvimTreeRefresh<CR>
 
 
 "===============================================================================
@@ -74,8 +69,6 @@ nnoremap <silent>[[ :BufferLineCycleNext<CR>
 nnoremap <silent>]] :BufferLineCyclePrev<CR>
 
 " These commands will move the current buffer backwards or forwards in the bufferline
-nnoremap <silent><C-]> :BufferLineMoveNext<CR>
-nnoremap <silent><C-[> :BufferLineMovePrev<CR>
 nnoremap <silent><leader>1 <Cmd>BufferLineGoToBuffer 1<CR>
 nnoremap <silent><leader>2 <Cmd>BufferLineGoToBuffer 2<CR>
 nnoremap <silent><leader>3 <Cmd>BufferLineGoToBuffer 3<CR>
