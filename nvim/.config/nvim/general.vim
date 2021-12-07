@@ -71,3 +71,25 @@ let g:tex_conceal = ''
 let g:vimtex_fold_manual = 1
 let g:vimtex_compiler_progname = 'nvr'
 let g:vimtex_view_general_viewer = 'qpdfview'
+set nofoldenable
+
+" This add Mark after modificatoin or insertion
+"----------------------------------------
+let g:detect_mod_reg_state = -1
+function! DetectRegChangeAndUpdateMark()
+    let current_small_register = getreg('"-')
+    let current_mod_register = getreg('""')
+    if g:detect_mod_reg_state != current_small_register || 
+                \ g:detect_mod_reg_state != current_mod_register
+        normal! mM
+        let g:detect_mod_reg_state = current_small_register
+    endif
+endfunction
+
+" Mark I at the position where the last Insert mode occured across the buffer
+autocmd InsertLeave * execute 'normal! mI'
+
+" Mark M at the position when any modification happened in the Normal or Insert mode
+autocmd CursorMoved * call DetectRegChangeAndUpdateMark()
+autocmd InsertLeave * execute 'normal! mM'
+"----------------------------------------

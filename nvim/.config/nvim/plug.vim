@@ -8,6 +8,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 
 if has("nvim")
+  Plug 'lewis6991/gitsigns.nvim'
   Plug 'hoob3rt/lualine.nvim'
   Plug 'dracula/vim', {'name': 'dracula'}
   Plug 'neovim/nvim-lspconfig'
@@ -16,6 +17,7 @@ if has("nvim")
   Plug 'hrsh7th/cmp-path'
   Plug 'hrsh7th/cmp-cmdline'
   Plug 'hrsh7th/nvim-cmp'
+  Plug 'onsails/lspkind-nvim'
   Plug 'tami5/lspsaga.nvim'
   Plug 'folke/lsp-colors.nvim'
   Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
@@ -28,10 +30,14 @@ if has("nvim")
   Plug 'akinsho/bufferline.nvim'
   Plug 'SirVer/ultisnips'
   Plug 'quangnguyen30192/cmp-nvim-ultisnips'
+  Plug 'kyazdani42/nvim-tree.lua'
 "   " --------- adding the following three plugins for Latex ---------
     Plug 'lervag/vimtex'
     Plug 'Konfekt/FastFold'
     Plug 'matze/vim-tex-fold'
+	Plug 'derektata/lorem.nvim'
+	Plug 'vim-scripts/loremipsum'
+	
 
 endif
 

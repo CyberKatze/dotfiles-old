@@ -12,15 +12,20 @@ require'lualine'.setup {
   sections = {
     lualine_a = {'mode'},
     lualine_b = {'branch'},
-    lualine_c = {{
+    lualine_c = {
+	  {
+      'filetype',
+      colored = true, -- displays filetype icon in color if set to `true
+      icon_only = true -- Display only icon for filetype
+    },
+	{
       'filename',
       file_status = true, -- displays file status (readonly status, modified status)
       path = 1 -- 0 = just filename, 1 = relative path, 2 = absolute path
     }},
     lualine_x = {
       { 'diagnostics', sources = {"nvim_lsp"}, symbols = {error = ' ', warn = ' ', info = ' ', hint = ' '} },
-      'encoding',
-      'filetype'
+	  'b:gitsigns_status'
     },
     lualine_y = {'progress'},
     lualine_z = {'location'}

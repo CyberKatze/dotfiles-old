@@ -24,6 +24,10 @@ nnoremap k gk
 noremap <silent> <C-S>          :update<CR>
 vnoremap <silent> <C-S>         <C-C>:update<CR>
 inoremap <silent> <C-S>         <C-O>:update<CR>
+"Close buffer
+noremap <silent> <C-B>          :bdelete<CR>
+vnoremap <silent> <C-B>         <C-C>:bdelete<CR>
+inoremap <silent> <C-B>         <C-O>:bdelete<CR>
 
 " Quickly close windows
 nnoremap <leader>x :x<cr>
@@ -65,8 +69,8 @@ vnoremap <silent> # :<C-U>
 "===============================================================================
 " These commands will navigate through buffers in order regardless of which mode you are using
 " e.g. if you change the order of buffers :bnext and :bprevious will not respect the custom ordering
-nnoremap <silent>[[ :BufferLineCycleNext<CR>
-nnoremap <silent>]] :BufferLineCyclePrev<CR>
+nnoremap <silent><leader>n :BufferLineCycleNext<CR>
+nnoremap <silent><leader>p :BufferLineCyclePrev<CR>
 
 " These commands will move the current buffer backwards or forwards in the bufferline
 nnoremap <silent><leader>1 <Cmd>BufferLineGoToBuffer 1<CR>

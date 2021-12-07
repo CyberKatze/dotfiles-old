@@ -1,8 +1,8 @@
 set completeopt=menu,menuone,noselect " noinsert
 
 lua <<EOF
+local lspkind = require('lspkind')
 
-local cmp = require'cmp'
 local lsp_symbols = {
   Text = "  ",
   Method = "  ",
@@ -30,88 +30,82 @@ local lsp_symbols = {
   Operator = "   ",
   TypeParameter = "   "
 }
-cmp.setup(
-  {
+
+--
+-- completion maps (not cmp) --
+-- line completion - use more!
+-- inoremap <C-l> <C-x><C-l>
+vim.api.nvim_set_keymap("i", "<c-l>", "<c-x><c-l>", { noremap = true })
+-- Vim command-line completion
+-- inoremap <C-v> <C-x><C-v>
+vim.api.nvim_set_keymap("i", "<c-v>", "<c-x><c-v>", { noremap = true })
+-- end non-cmp completion maps --
+
+-- Setup nvim-cmp
+local cmp = require "cmp"
+
+
+-- @TODOUA: Try cmdline again soon, lots of updates since last tried
+cmp.setup {
     snippet = {
       expand = function(args)
 	   vim.fn["vsnip#anonymous"](args.body)
       end
+  },
+  mapping = {
+    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+    ["<C-Space>"] = cmp.mapping.complete(),
+    ["<CR>"] = cmp.mapping {
+      i = cmp.mapping.confirm { select = true },
     },
-    mapping = {
-      ["<C-p>"] = cmp.mapping.select_prev_item(),
-      ["<C-n>"] = cmp.mapping.select_next_item(),
-      ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-      ["<C-f>"] = cmp.mapping.scroll_docs(4),
-      ["<C-Space>"] = cmp.mapping.complete(),
-      ["<C-e>"] = cmp.mapping.close(),
-      ["<CR>"] = cmp.mapping.confirm {
-        behavior = cmp.ConfirmBehavior.Replace,
-        select = true
-      },
-      ["<cr>"] = cmp.mapping.confirm({select = true})
+    ["<Right>"] = cmp.mapping {
+      i = cmp.mapping.confirm { select = true },
     },
-    formatting = {
-      format = function(entry, item)
-        item.kind = lsp_symbols[item.kind] --item.kind
-        -- set a name for each source
-        item.menu =
-          ({
-          spell = "[Spell]",
-          buffer = "[Buffer]",
-          calc = "[Calc]",
-          emoji = "[Emoji]",
-          nvim_lsp = "[LSP]",
-          path = "[Path]",
-          look = "[Look]",
-		  ultisnips = "[Snippet]",
-          treesitter = "[treesitter]",
-          nvim_lua = "[Lua]",
-          latex_symbols = "[Latex]",
-          cmp_tabnine = "[Tab9]"
-        })[entry.source.name]
-        return item
-      end
-    },
-    sources = {
-      {name = "nvim_lsp"},
-      {name = "path"},
+    ["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "s" }),
+    ["<S-Tab>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "s" }),
+    ["<C-e>"] = cmp.mapping.abort(),
+    ["<Up>"] = cmp.mapping(cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert }, { "i" }),
+    ["<Down>"] = cmp.mapping(cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert }, { "i" }),
+  },
+  experimental = {
+    ghost_text = true,
+  },
+  documentation = {
+    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+  },
+  sources = {
+    -- 'crates' is lazy loaded
+    { name = "nvim_lsp" },
+    { name = "treesitter" },
       {name = "ultisnips"},
-      {name = "buffer"},
-      {name = "nvim_lua"},
-      {name = "treesitter"},
-      {name = "spell"},
-      {name = "calc"},
-      {name = "emoji"},
-      {name = "look"},
-      {name = "latex_symbols"},
-      {name = "cmp_tabnine"},
-      {name = "neorg"},
-    }
-  }
-)
+    { name = "path" },
+    {
+      name = "buffer",
+      option = {
+        get_bufnrs = function()
+          return vim.api.nvim_list_bufs()
+        end,
+      },
+    },
+    { name = "spell" },
+  },
+  formatting = {
+    format = function(entry, vim_item)
+      vim_item.kind = string.format("%s %s", lspkind.presets.default[vim_item.kind], vim_item.kind)
+      vim_item.menu = ({
+        nvim_lsp = "ﲳ",
+        nvim_lua = "",
+        treesitter = "",
+        path = "ﱮ",
+        buffer = "﬘",
+        zsh = "",
+        ultisnips = "",
+        spell = "暈",
+      })[entry.source.name]
 
- -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-  cmp.setup.cmdline('/', {
-    sources = {
-      { name = 'buffer' }
-    }
-  })
-
-  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-  cmp.setup.cmdline(':', {
-    sources = cmp.config.sources({
-      { name = 'path' }
-    }, {
-      { name = 'cmdline' }
-    })
-  })
-vim.cmd(
-  [[
-augroup NvimCmp
-au!
-au FileType TelescopePrompt lua require('cmp').setup.buffer { enabled = false }
-augroup END
-]]
-)
-
+      return vim_item
+    end,
+  },
+}
 EOF
