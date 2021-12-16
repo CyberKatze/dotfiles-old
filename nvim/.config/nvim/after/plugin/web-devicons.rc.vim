@@ -10,4 +10,12 @@ require'nvim-web-devicons'.setup {
  -- will get overriden by `get_icons` option
  default = true;
 }
+require("nvim-web-devicons").set_icon {
+  tex = {
+    icon = "",
+    color = "#3Db117",
+    cterm_color = "58",
+    name = "Tex"
+  }
+}
 EOF

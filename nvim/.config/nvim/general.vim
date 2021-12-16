@@ -93,3 +93,6 @@ autocmd InsertLeave * execute 'normal! mI'
 autocmd CursorMoved * call DetectRegChangeAndUpdateMark()
 autocmd InsertLeave * execute 'normal! mM'
 "----------------------------------------
+" Clear highlighting on escape in normal mode
+nnoremap <esc> :noh<return><esc>
+nnoremap <esc>^[ <esc>^[
