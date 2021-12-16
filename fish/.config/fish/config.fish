@@ -15,3 +15,25 @@ alias lf lfrun
 alias color "colorscript random"
 alias ll "exa --icons -l -g"
 alias tlmgr "/usr/share/texmf-dist/scripts/texlive/tlmgr.pl --usermode"
+
+#--------------------------------------------------------
+#Function
+#--------------------------------------------------------
+# source nvm
+function nvm
+    bass source ~/.nvm/nvm.sh --no-use ';' nvm $argv
+end
+
+# Source rvm Ruby Verson Manager
+function rvm
+	bass source ~/.rvm/scripts/rvm ';' rvm $argv
+end
+
+# Run tmux on Start up
+if status is-interactive
+and not set -q TMUX
+	set -g TMUX tmux new-session -d -s base
+    eval $TMUX
+    tmux attach-session -d -t bas
+end
+
