@@ -30,10 +30,10 @@ function rvm
 end
 
 # Run tmux on Start up
-if status is-interactive
-and not set -q TMUX
-	set -g TMUX tmux new-session -d -s base
-    eval $TMUX
-    tmux attach-session -d -t bas
-end
+#if status is-interactive
+#and not set -q TMUX
+#	set -g TMUX tmux new-session -d -s base
+#    eval $TMUX
+#    tmux attach-session -d -t bas
+#end
 

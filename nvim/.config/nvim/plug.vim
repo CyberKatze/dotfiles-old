@@ -8,6 +8,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 
 if has("nvim")
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'ellisonleao/glow.nvim'
   Plug 'lewis6991/gitsigns.nvim'
   Plug 'hoob3rt/lualine.nvim'
@@ -38,7 +39,11 @@ if has("nvim")
     Plug 'matze/vim-tex-fold'
 	Plug 'derektata/lorem.nvim'
 	Plug 'vim-scripts/loremipsum'
-	
+	 " Typesripts packages
+	Plug 'jose-elias-alvarez/null-ls.nvim'
+	Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
+	Plug 'terrortylor/nvim-comment', " comment support with 'gcc'
+	Plug 'RRethy/vim-illuminate' " highlight other uses of current word	
 
 endif
 

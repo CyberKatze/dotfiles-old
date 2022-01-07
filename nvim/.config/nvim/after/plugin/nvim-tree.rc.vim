@@ -1,10 +1,8 @@
-
-
 lua << EOF
 require'nvim-tree'.setup {
   disable_netrw       = true,
   hijack_netrw        = true,
-  open_on_setup       = false,
+  open_on_setup       = true,
   ignore_ft_on_setup  = {},
   auto_close          = false,
   open_on_tab         = false,
@@ -15,7 +13,7 @@ require'nvim-tree'.setup {
     auto_open = true,
   },
   diagnostics = {
-    enable = false,
+    enable = true,
     icons = {
       hint = "",
       info = "",
@@ -61,6 +59,7 @@ require'nvim-tree'.setup {
 }
 
 EOF
+
 let g:nvim_tree_quit_on_open = 1 "0 by default, closes the tree when you open a file
 let g:nvim_tree_indent_markers = 1 "0 by default, this option shows indent markers when folders are open
 let g:nvim_tree_git_hl = 1 "0 by default, will enable file highlight for git attributes (can be used without the icons).

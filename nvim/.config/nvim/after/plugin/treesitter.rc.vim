@@ -26,7 +26,8 @@ require'nvim-treesitter.configs'.setup {
     "go",
     "bash",
     "json",
-	"latex"
+	"latex",
+	"graphql"
   },
 }
 

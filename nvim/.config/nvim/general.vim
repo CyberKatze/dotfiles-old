@@ -63,9 +63,11 @@ set ruler
 au BufRead * normal zR
 
 "Conceal half-width space with space
-call matchadd('Conceal', '\%u200c', 10, -1, {'conceal':' '})
-set conceallevel=2 concealcursor=nv
-set termbidi
+au FileType,BufRead,BufNewFile *.tex
+	\ call matchadd('Conceal', '‌', 10, -1, {'conceal':'-'}) |
+	\ set conceallevel=2 |
+	\ set concealcursor=nvi |
+	\ set termbidi |
 "Latex
 let g:tex_conceal = ''
 let g:vimtex_fold_manual = 1
