@@ -1,0 +1,7 @@
+# Kitty
+Kitty Terminal
+## Installation
+-
+-
+
+
