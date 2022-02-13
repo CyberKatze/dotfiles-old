@@ -1,0 +1,10 @@
+#!/bin/sh
+
+if [ -z $(pgrep wlsunset) ]
+then
+ nohup wlsunset -l 34.79 -L 48.51 2>/dev/null & 
+else
+  pkill wlsunset
+fi
+exit 0
+
