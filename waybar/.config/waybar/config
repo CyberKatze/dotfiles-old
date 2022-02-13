@@ -1,0 +1,276 @@
+// vim:foldmethod=marker
+{
+
+// => Left Modules {{{  
+
+  "modules-left": ["sway/workspaces", "custom/media"],
+
+// => sway/workspaces {{{  
+
+  "sway/workspaces": {
+     "disable-scroll": true,
+     "all-outputs": false,
+     "format": "{icon}",
+     "format-icons": {
+       "1": "",
+       "2": "",
+       "3": "",
+       "4": "",
+       "5": "",
+       "6": "",
+       "7": "",
+       "8": "",
+       "9": "",
+       "10": "",
+       "urgent": "",
+       "focused": "",
+       "default": ""
+     }
+   },
+ 
+// }}} 
+
+// => wlr/taskbar {{{  
+
+//  "wlr/taskbar": {
+//      "format": "{icon}",
+//      "icon-size": 20,
+//      "icon-theme": "Star",
+//      "tooltip-format": "{title}",
+//      "on-click": "activate",
+//      "on-click-middle": "activate",
+//      "on-click-right": "close"
+//    },
+//    
+// }}} 
+
+// => custom/media {{{  
+
+"custom/media": {
+    "format": "<span color='#00aa44'> </span>{icon} {}",
+    "escape": true,
+    "return-type": "json",
+    "max-length": 30,
+    "on-click": "playerctl play-pause",
+    "on-click-right": "playerctl stop",
+    "smooth-scrolling-threshold": 2, // This value was tested using a trackpad, it should be lowered if using a mouse.
+    "on-scroll-up": "playerctl next",
+    "on-scroll-down": "playerctl previous",
+    "exec": "$HOME/.scripts/mediaplayer.py 2> /dev/null", // Script in resources/custom_modules folder
+    "exec-if": "[ -n $(playerctl -l) ]"
+},
+
+// }}} 
+
+// }}} 
+
+// => Center Modules {{{  
+
+  "modules-center": ["cpu", "memory", "custom/disk_root", "temperature", "clock", "idle_inhibitor", "sway/language"],
+
+// => cpu {{{  
+
+  "cpu": {
+    "interval": 5,
+    "format": "{usage}% "
+  },
+
+// }}} 
+
+// => memory {{{  
+
+  "memory": {
+    "interval": 5,
+    "format": "{used:0.1f}G "
+  },
+
+// }}} 
+
+// => custom/disk_root {{{  
+
+  "custom/disk_root": {
+    "format": "<span color='#a1b5e9'>{}  </span>",
+    "interval": 3600,
+    "exec": "df -h --output=avail / | tail -1 | tr -d ' '",
+    "tooltip": "false"
+	},
+
+// }}} 
+
+// => temperature {{{  
+
+  "temperature": {
+    "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
+    "critical-threshold": 82,
+    "format-critical": "{temperatureC}°C {icon}",
+    "format": "{icon}",
+    "format-alt": "{temperatureC}°C {icon}",
+    "format-alt-click": "click-left",
+    "format-icons": [""]
+  },
+
+// }}} 
+
+// => clock {{{  
+
+  "clock": {
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format-alt": "{:%Y-%m-%d}",
+    "format-alt-click": "click-left",
+    "interval": 60,
+    "format": "{:%H:%M} ",
+    "max-length": 25,
+    "on-click": "gnome-calendar"
+  },
+
+// }}} 
+
+// => custom/notification {{{  
+// "custom/notification": {
+//    "tooltip": false,
+//    "format": "{icon}",
+//    "format-icons": {
+//      "notification": "<span foreground='red'><sup></sup></span>",
+//      "none": "",
+//      "dnd-notification": "<span foreground='red'><sup></sup></span>",
+//      "dnd-none": ""
+//    },
+//    "return-type": "json",
+//    "exec-if": "which swaync-client",
+//    "exec": "swaync-client -swb",
+//    "on-click": "swaync-client -t -sw",
+//    "on-click-right": "swaync-client -d -sw",
+//    "escape": true
+//  },
+
+// }}} 
+
+// => language {{{  
+
+  "sway/language": {
+      "format": "{shortDescription}",
+      },
+
+// }}} 
+
+// => idle_inhibitor {{{  
+
+  "idle_inhibitor": {
+      "format": "{icon}",
+      "on-click": "/home/m3d/.scripts/sunset",
+      "format-icons": {
+        "activated": "",
+        "deactivated": ""
+      },
+    },
+
+
+// }}} 
+
+// }}} 
+
+// => Right Modules {{{  
+
+  "modules-right": [ "tray","network#wifi",  "pulseaudio","backlight", "battery", "custom/power"],
+
+// => tray {{{  
+
+    "tray": {
+        "icon-size": 15,
+        "spacing": 10
+    },
+
+// }}} 
+
+// => network {{{  
+"network#wifi": {
+    "interval": 30,
+    "interface": "wlp*",
+    "format": "{ifname}",
+    "format-wifi": "<span color='#01f588'> {bandwidthDownBits}</span> <span color='#0088ff'> {bandwidthUpBits}</span>",
+    "format-ethernet": "{ipaddr}/{cidr} ",
+    "format-disconnected": "{ifname}", //An empty format will hide the module.
+    "tooltip-format": "{ifname} via {gwaddr} ",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+    "tooltip-format-ethernet": "{ifname} ",
+    "tooltip-format-disconnected": "Disconnected",
+    "max-length": 50
+},
+// }}} 
+
+// => pulseaudio {{{  
+
+  "pulseaudio": {
+    "scroll-step": 5, // %, can be a float
+    "format": "{volume}% {icon} {format_source}",
+    "format-bluetooth": "{volume}% {icon} {format_source}",
+    "format-bluetooth-muted": " {icon} {format_source}",
+    "format-muted": " {format_source}",
+    "format-source": "{volume}% ",
+    "format-source-muted": "",
+    "states": {
+    "high": 70,
+    "medium": 50,
+    "low": 25,
+    "mute": 0
+    },
+    "format-icons": {
+      "headphone": ["", "", ""],
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["", "", ""]
+    },
+    "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+    "on-click-middle": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+    "on-click": "pavucontrol"
+  },
+
+// }}} 
+
+// => backlight {{{  
+
+  "backlight": {
+    "device": "intel_backlight",
+    "format": "{icon}",
+    "format-alt": "{percent}% {icon}",
+    "format-alt-click": "click-left",
+    "on-scroll-up": "light -A 5",
+    "on-scroll-down": "light -U 5",
+    "format-icons": ["", ""]
+  },
+  
+// }}} 
+
+// => custom/power {{{  
+
+  "custom/power": {
+    "format": "",
+    "on-click": "swaynag -t warning -m 'Power Menu Options' -b 'Logout' 'swaymsg exit' -b 'Restart' 'shutdown -r now' -b 'Shutdown'  'shutdown -h now' --background=#005566 --button-background=#009999 --button-border=#002b33 --border-bottom=#002b33"
+  },
+
+// }}} 
+
+// => battery {{{  
+
+  "battery": {
+    "states": {
+      "good": 100,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon}",
+    "format-alt": "{capacity}% {icon}",
+    "format-alt-click": "click-left",
+    "format-charging": "{capacity}% ",
+    "format-plugged": "{capacity}% ",
+    "format-full": "{icon}",
+    "format-icons": ["", "", "", "", ""]
+  },
+
+// }}} 
+
+// }}} 
+}
