@@ -1,34 +1,41 @@
+#vim:fileencoding=utf-8:foldmethod=marker
+
+#: Basic Settings {{{
+
 set ratios 1:2:3
-set cleaner ~/.config/lf/cleaner
-# Basic Settings
-set previewer ~/.config/lf/preview
+set cleaner ~/.config/lf/cleaner_kitty.sh
+set previewer ~/.config/lf/preview_kitty.sh
 set preview true
 set hidden true
 set drawbox true
 set icons true
 set ignorecase true
 
-# Custom Functions
-cmd open ${{
-    case $(file --mime-type "$f" -bL) in
-        text/*|application/json|text/plain) $EDITOR "$f";;
+#: }}}
+
+#: Custom Functions {{{
+
+cmd open &{{
+    case $(file -b --mime-type "$f") in
+        text/*|application/json|text/plain) kitty -e $EDITOR "$f";;
+        application/x-bittorrent) transmission-cli "$f";;
         *) xdg-open "$f" > /dev/null 2>&1  ;;
     esac
 }}
 
-cmd mkdir ${{
+cmd mkdir %{{
   printf "Directory Name: "
   read ans
   mkdir $ans
 }} 
 
-cmd mkfile ${{
+cmd mkfile %{{
   printf "File Name: "
   read ans
   $EDITOR $ans
 }}
 
-cmd chmod ${{
+cmd chmod %{{
   printf "Mode Bits: "
   read ans
 
@@ -40,7 +47,19 @@ cmd chmod ${{
   lf -remote 'send reload'
 }}
 
-cmd sudomkfile ${{
+cmd chown %{{
+  printf "newowner:newgorup: "
+  read ans
+
+  for file in "$fx"
+  do
+    chown $ans $file
+  done
+
+  lf -remote 'send reload'
+}}
+
+cmd sudomkfile %{{
   printf "File Name: "
   read ans
   sudo $EDITOR $ans
@@ -63,6 +82,18 @@ cmd fzf_jump ${{
   lf -remote "send $id $cmd \"$res\""
 }}
 
+cmd fzf_search ${{
+    res="$( \
+        RG_PREFIX="rg --column --line-number --no-heading --color=always \
+            --smart-case "
+        FZF_DEFAULT_COMMAND="$RG_PREFIX ''" \
+            fzf --bind "change:reload:$RG_PREFIX {q} || true" \
+            --ansi --layout=reverse --header 'Search in files' \
+            | cut -d':' -f1
+    )"
+    [ ! -z "$res" ] && lf -remote "send $id select \"$res\""
+}}
+
 cmd broot_jump ${{
   f=$(mktemp)
   res="$(broot --outcmd $f && cat $f | sed 's/cd //')"
@@ -75,12 +106,9 @@ cmd broot_jump ${{
   lf -remote "send $id $cmd \"$res\""
 }}
 
-cmd open_config  ${{
-  $EDITOR $(bookmenu -b ~/.config/bookmenu/configs -f fzf -o)
-}}
 
 cmd dragon %dragon-drag-and-drop -a -x $fx
-cmd dragon-stay %dragon-drag-and-drop -a $fx
+cmd dragon-stay &dragon-drag-and-drop -a $fx 
 cmd dragon-individual %dragon-drag-and-drop $fx
 cmd cpdragon %cpdragon
 cmd mvdragon %mvdragon
@@ -97,7 +125,7 @@ cmd unarchive ${{
   esac
 }}
 
-cmd zip %zip -r "$f" "$f"
+cmd zip %zip -r "$f.zip" "$f"
 cmd tar %tar cvf "$f.tar" "$f"
 cmd targz %tar cvzf "$f.tar.gz" "$f"
 cmd tarbz2 %tar cjvf "$f.tar.bz2" "$f"
@@ -127,8 +155,12 @@ cmd clear_trash %trash-empty
 cmd restore_trash ${{
   trash-restore
 }}
+cmd configrc ${{
+    $EDITOR ~/.config/lf/lfrc
+  }}
 
 cmd stripspace %stripspace "$f"
+
 
 # Bindings
 # Remove some defaults
@@ -144,7 +176,6 @@ map f
 
 # File Openers
 map ee $$EDITOR "$f"
-map u $view "$f"
 
 # Archive Mappings
 map az zip
@@ -169,6 +200,10 @@ map dm mvdragon
 map dc cpdragon
 map dl dlfile
 
+# fuzzy finder and rip grep
+map gr :fzf_search
+map <c-f> :fzf_jump
+
 map ss stripspace
 
 # Basic Functions
@@ -177,20 +212,22 @@ map DD delete
 map p paste
 map x cut
 map y copy
+map C clear
 map <enter> open
 map mf mkfile
 map mr sudomkfile
 map md mkdir
 map ms $mkscript
 map ch chmod
+map co chown
 map bg setwallpaper
-map o open_config
+map ci configrc
+map o open
 map br $vimv $fx
 map r rename
 map H top
 map L bottom
 map R reload;redraw
-map C clear
 map U unselect
 
 # Movement
@@ -205,8 +242,8 @@ map gp cd ~/Pictures
 map gd cd ~/Documents
 
 map gD cd ~/Downloads
-map gb cd ~/books
-map gB cd ~/books/Current
+map gb cd ~/Books
+map gB cd ~/Books/Current
 
 
 map gc cd ~/.config
