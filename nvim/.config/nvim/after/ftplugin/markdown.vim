@@ -1,1 +1,0 @@
-noremap ;p :Glow<CR>
