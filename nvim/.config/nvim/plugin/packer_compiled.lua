@@ -260,11 +260,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/m3d/.local/share/nvim/site/pack/packer/start/vim-bbye",
     url = "https://github.com/moll/vim-bbye"
-  },
-  ["which-key.nvim"] = {
-    loaded = true,
-    path = "/home/m3d/.local/share/nvim/site/pack/packer/start/which-key.nvim",
-    url = "https://github.com/folke/which-key.nvim"
   }
 }
 

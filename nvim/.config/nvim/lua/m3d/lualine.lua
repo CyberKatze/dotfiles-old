@@ -66,7 +66,7 @@ lualine.setup({
         path = 1 -- 0 = just filename, 1 = relative path, 2 = absolute path
       }
     },
-		lualine_x = { diff, diagnostics, 'b:gitsigns_status'},
+		lualine_x = { diff, diagnostics},
 		lualine_y = {'progress'},
 		lualine_z = {'location'},
 	},
